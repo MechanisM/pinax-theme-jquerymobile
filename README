@@ -34,9 +34,7 @@ by default theme using jquery CDN with latest jquery, jquerymobile.min.js, jquer
 Forms
 -----
 
-To style forms,
-
-and do something like:
+To style forms, do something like:
     
     <form method="POST" action="">{% csrf_token %}
     <ul data-role="listview" data-inset="true">
