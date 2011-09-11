@@ -16,7 +16,7 @@ Site name comes from Sites fixture.
 Your "site_base.html" should extend "theme_base.html"
 
 nav & subnav blocks
------
+-------------------
 
 "nav" and "subnav" blocks content should be something like:
 
