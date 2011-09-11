@@ -1,0 +1,15 @@
+{% extends "idios/base.html" %}{% load i18n %}
+{% block head_title %}{% trans "Edit Profile" %}{% endblock %}
+{% block body_title %}{% trans "Edit Profile" %}{% endblock %}
+{% block body %}
+<form method="POST" action="{% url profile_edit %}">{% csrf_token %}
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider"><h2>{% trans "Edit Profile" %}</h2></li>
+{{ profile_form.as_ul }}
+<li><div data-role="controlgroup" data-type="horizontal">
+<button data-icon="star" type="submit">{% trans "Update" %}</button>
+<a data-role="button" data-icon="delete" href="{% url profile_detail profile.user.username %}">{% trans "Cancel" %}</a>
+</div></li>
+</ul>
+</form>
+{% endblock %}

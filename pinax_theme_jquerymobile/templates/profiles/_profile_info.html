@@ -1,0 +1,5 @@
+{% load i18n %}
+{% if profile.name %}<li><b>{% trans "Name" %}</b>: {{ profile.name }}</li>{% endif %}
+{% if profile.about %}<li><b>{% trans "About" %}</b>: {{ profile.about }}</li>{% endif %}
+{% if profile.location %}<li><b>{% trans "Location" %}</b>: {{ profile.location }}</li>{% endif %}
+{% if profile.website %}<li><a href="{{ profile.website }}"><b>{% trans "Website" %}</b>: {{ profile.website }}</a></li>{% endif %}

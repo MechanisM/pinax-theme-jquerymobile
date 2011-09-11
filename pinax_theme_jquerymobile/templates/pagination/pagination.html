@@ -1,0 +1,22 @@
+{% load i18n %}
+{% if is_paginated %}
+<div data-role="controlgroup" data-type="horizontal">
+{% if page_obj.has_previous %}
+<a data-role="button" href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}">{% trans "Previous" %}</a>
+{% else %}
+<a data-role="button">{% trans "Previous" %}</a>
+{% endif %}
+{% for page in pages %}
+{% if page %}
+<a data-role="button"{% ifequal page page_obj.number %} data-theme="a"{% endifequal %} href="?page={{ page }}{{ getvars }}{{ hashtag }}">{{ page }}</a>
+{% else %}
+<a data-role="button" href="#">…</a>
+{% endif %}
+{% endfor %}
+{% if page_obj.has_next %}
+<a data-role="button" href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}">{% trans "Next" %}</a>
+{% else %}
+<a data-role="button">{% trans "Next" %}</a>
+{% endif %}
+</div>
+{% endif %}

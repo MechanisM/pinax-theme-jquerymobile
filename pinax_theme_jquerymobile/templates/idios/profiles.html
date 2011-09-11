@@ -1,0 +1,9 @@
+{% extends "idios/base.html" %}{% load i18n account_tags pagination_tags %}
+{% block head_title %}{% trans "All Profiles" %}{% endblock %}
+{% block body_title %}{% trans "All Profiles" %}{% endblock %}
+{% block body %}{% autopaginate profiles %}
+<ul data-role="listview" data-filter="true" data-inset="true" data-split-icon="star">
+<li data-role="list-divider">{% trans "All Profiles" %}</li>
+{% for profile in profiles %}{% include "profiles/_profile_item.html" %}{% endfor %}
+</li>{% paginate %}
+{% endblock %}

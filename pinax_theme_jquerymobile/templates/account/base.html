@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}{% load i18n ifsetting_tag %}
+{% block extra_head %}{% endblock %}
+{% block body_title_base %}{% trans "Account" %} : {% block body_title %}{% endblock %}{% endblock %}
+{% block nav %}
+<li><a data-role="button" href="{% url acct_email %}">{% trans "Email Addresses" %}</a></li>{% ifsetting ACCOUNT_USE_OPENID %}
+<li><a data-role="button" href="/openid/associations/">{% trans "OpenID Associations" %}</a></li>{% endifsetting %}{% if user.password %}
+<li><a data-role="button" href="{% url acct_passwd %}">{% trans "Change Password" %}</a></li>{% else %}
+<li><a data-role="button" href="{% url acct_passwd_set %}">{% trans "Set Password" %}</a></li>{% endif %}{% if user.password and request.openids %}
+<li><a data-role="button" href="{% url acct_passwd_delete %}">{% trans "Delete Password" %}</a></li>{% endif %}{% ifsetting USE_I18N %}
+<li><a data-role="button" href="{% url acct_language_change %}">{% trans "Language" %}</a></li>{% endifsetting %}
+<li><a data-role="button" href="{% url acct_timezone_change %}">{% trans "Timezone" %}</a></li>
+{% endblock %}

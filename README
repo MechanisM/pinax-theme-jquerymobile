@@ -1,0 +1,54 @@
+A Pinax theme based on jQuery Mobile
+==========================================
+
+
+Quick Start
+-----------
+
+Include "pinax-theme-jquerymobile" in your requirements file and
+"pinax_theme_jquerymobile" in your INSTALLED APPS.
+
+Make sure both template loaders and staticfiles finders includes
+app directories.
+
+Site name comes from Sites fixture.
+
+Your "site_base.html" should extend "theme_base.html"
+
+nav & subnav blocks
+-----
+
+"nav" and "subnav" blocks content should be something like:
+
+    <li><a data-role="button" data-icon="back" href="{% url acct_logout %}">Logout</a></li>
+
+"nav" block appears in header and "subnav" block in footer
+
+Your pages should have blocks "head_title", "body_title"(with same content as "head_title") and "body" and should extend
+"site_base.html".
+
+The url name "home" should be defined as the homepage.
+
+by default theme using jquery CDN with latest jquery, jquerymobile.min.js, jquerymobile.min.css
+
+Forms
+-----
+
+To style forms,
+
+and do something like:
+    
+    <form method="POST" action="">{% csrf_token %}
+    <ul data-role="listview" data-inset="true">
+    {{ form.as_ul }}
+    <li><button type="submit">Submit</button></li>
+    </ul>
+    </form>
+
+
+Todo / Issues
+-------------
+
+* build additional templates for other Pinax-related apps
+* add settings option to switch jQuery Mobile themes (A,B,C,D,E) in settings
+* add settings option to load jQuery Mobile static files from CDN or use local files.

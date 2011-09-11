@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="{{ LANGUAGE_CODE }}"><head><meta charset="utf-8" />{% load i18n ifsetting_tag %}
+<title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="http://code.jquery.com/mobile/latest/jquery.mobile.min.css" rel="stylesheet"/>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
+{% block extra_head_base %}{% block extra_head %}{% endblock %}{% endblock %}
+</head>
+<body>
+<div data-role="page" id="main">
+
+{% block topbar_base %}
+<div data-role="header" id="header">
+{% block topbar %}
+<a href="{% url home %}" data-icon="home" data-iconpos="notext" class="ui-btn-left">Home</a>
+<h1>{% block body_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block body_title %}{% endblock %}{% endblock %}</h1>
+{% if user.is_staff %}<a data-icon="gear" class="ui-btn-right" rel="external" href="{% url admin:index %}">Admin</a>{% endif %}
+<div data-role="navbar"><ul>{% block nav %}{% endblock %}</ul></div>
+{% endblock %}
+</div><!-- /header -->
+{% endblock %}
+
+{% block body_base %}
+<div data-role="content">
+
+{% if messages %}
+<ul data-role="listview" data-theme="e" data-inset="true">{% for message in messages %}
+<li>{% if message.tags %}{{ message.tags|capfirst }}! {% endif %}{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% block body %}{% endblock %}
+</div><!-- /content -->
+{% endblock %}
+
+{% block footer_base %}
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar"><ul>{% include "navbar.html" %}</ul></div>
+</div><!-- /footer -->
+{% endblock %}
+
+</div><!-- /page -->
+{% block extra_body_base %}{% block extra_body %}{% endblock %}{% endblock %}
+</body></html>

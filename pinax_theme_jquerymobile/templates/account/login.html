@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}{% load i18n ifsetting_tag account_tags %}
+{% block head_title %}{% trans "Log In" %}{% endblock %}
+{% block body_title %}{% trans "Log In" %}{% endblock %}
+{% block body %}
+{% if user.is_authenticated %}{% user_display user as user_display %}
+<a data-role="button" href="#" data-theme="e" data-icon="info">{% trans "Note" %}: {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</a>
+{% else %}
+<form method="POST" action="{% url acct_login %}" autocapitalize="off">{% csrf_token %}
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider"><h2>{% trans "Log In" %}</h2></li>
+{{ form.as_ul }}
+{% if redirect_field_value %}<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />{% endif %}
+<li><button type="submit">{% trans "Log in" %}</button></li>
+<li><a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a></li>
+</ul>
+</form>
+<p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p> 
+{% endif %}   
+{% endblock %}

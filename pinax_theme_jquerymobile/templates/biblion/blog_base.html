@@ -1,0 +1,35 @@
+{% extends "site_base.html" %}{% load i18n biblion_tags %}
+{% block body_title_base %}{% trans "Blog" %} : {% block body_title %}{% endblock %}{% endblock %}
+{% block body %}
+<div data-role="collapsible-set">
+
+	<div data-role="collapsible">{% blog_sections as sections %}
+	<h2>Categories</h2>
+	<p><ul data-role="listview" data-inset="true">
+                {% for section in sections %}
+                    {% ifequal section.0 "all" %}
+                        <li><a href="{% url blog %}">{{ section.1 }}</a></li>
+                    {% else %}
+                        <li><a href="{% url blog_section section.0 %}">{{ section.1 }}</a></li>
+                    {% endifequal %}
+                {% endfor %}
+           </ul>
+        </p>
+	</div>
+	
+	<div data-role="collapsible">{% latest_blog_posts as recent_posts %}
+	<h2>Recent Posts</h2>
+	<p><ul data-role="listview" data-inset="true">
+                {% for post in recent_posts %}
+                    <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+                {% empty %}
+                    <li>None.</li>
+                {% endfor %}
+           </ul>
+        </p>
+	</div>
+</div>	
+
+{% block blog_content %}{% endblock %}
+
+{% endblock %}

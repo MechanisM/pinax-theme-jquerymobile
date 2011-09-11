@@ -1,0 +1,33 @@
+{% load i18n dialogos_tags %}
+<div data-role="collapsible-set">
+<div data-role="collapsible">
+<h2>Comments</h2>
+<p>
+<ul data-role="listview" data-inset="true">
+{% comments post as comments %}
+{% for comment in comments %}
+<li>
+{{ comment.comment|escape|urlize|safe }}
+<span class="ui-li-count ui-btn-up-a">{{ comment.submit_date|timesince }} ago by {{ comment.author }}</span>
+</li>
+{% endfor %}
+</ul>
+</p>
+</div>
+
+
+<div data-role="collapsible">
+<h2>Add Comment</h2>
+<p>
+{% comment_form post as comment_form %}
+<form method="POST" action="{% comment_target post %}">{% csrf_token %}
+<ul data-role="listview" data-inset="true">
+<li>{{ comment_form.comment }}</li>
+<input type="hidden" name="next" value="{{ request.path }}" />
+<li><button type="submit">{% trans "Add Comment" %}</button></li>
+</ul>
+</form>
+</p>
+</div>
+
+</div>

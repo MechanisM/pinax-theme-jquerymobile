@@ -1,0 +1,11 @@
+{% extends "site_base.html" %}{% load i18n %}
+{% block extra_head %}{% endblock %}
+{% block body_title_base %}{% trans "Profile" %} : {% block body_title %}{% endblock %}{% endblock %}
+{% block nav %}
+{% if user.is_authenticated %}
+<li><a data-role="button" data-icon="star" href="{% url profile_detail user.username %}">{% trans "Your Profile" %}</a></li>
+<li><a data-role="button" data-icon="grid" href="{% url profile_list %}">{% trans "All Profiles" %}</a></li>
+<li><a data-role="button" data-icon="gear" rel="external" href="{% url profile_edit %}">{% trans "Edit profile" %}</a></li>
+{% else %}
+{% endif %}
+{% endblock %}

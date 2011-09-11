@@ -1,0 +1,10 @@
+{% load i18n %}{% if user.is_authenticated %}
+<li><a data-role="button" data-icon="home" href="{% url profile_detail user.username %}">{% trans "Profile" %}</a></li>
+<li><a data-role="button" data-icon="gear" href="{% url acct_email %}">Account</a></li>
+<li><a data-role="button" data-icon="grid" href="{% url blog %}">{% trans "Blog" %}</a></li>
+<li><a data-role="button" data-icon="info" href="{% url notification_notices %}">{% trans "Notices" %}{% if notice_unseen_count %} ({{ notice_unseen_count }}){% endif %}</a></li>
+<li><a data-role="button" data-icon="back" href="{% url acct_logout %}">Logout</a></li>{% else %}
+{% block subnav %}{% endblock %}
+<li><a data-role="button" data-icon="arrow-d" href="{% url acct_login %}">Login</a></li>
+<li><a data-role="button" data-icon="arrow-u" href="{% url acct_signup %}">Sign Up</a></li>
+{% endif %}

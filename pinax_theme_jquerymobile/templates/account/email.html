@@ -1,0 +1,61 @@
+{% extends "account/base.html" %}{% load i18n %}
+{% block head_title %}{% trans "Email Addresses" %}{% endblock %}
+{% block body_title %}{% trans "Email Addresses" %}{% endblock %}
+{% block body %}   
+{% if user.emailaddress_set.all %}
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">{% trans "Email Addresses" %}</li>
+{% for emailaddress in user.emailaddress_set.all %}
+<li>
+{% if emailaddress.primary %}<b>{{ emailaddress.email }}</b>{% else %}{{ emailaddress.email }}{% endif %}
+
+{% if emailaddress.verified %}
+<span class="ui-li-count ui-btn-up-a">{% trans "verified" %}
+{% if emailaddress.primary %} - {% trans "primary" %}
+{% else %}
+<form style="display:none;" id="primary_{{ forloop.counter }}" method="post" action="">{% csrf_token %}
+<input type="hidden" name="email" value="{{ emailaddress.email }}"/><input type="hidden" name="action" value="primary"/>
+</form>
+<a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">{% trans "make primary" %}</a>
+{% endif %}
+</span>
+{% else %}
+<span class="ui-li-count ui-btn-up-a">{% trans "unverified" %}
+<form style="display:none;" id="send_{{ forloop.counter }}" method="post" action="">{% csrf_token %}
+<input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+<input type="hidden" name="action" value="send"/>
+</form>
+<a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a>
+</span>
+{% endif %}
+
+
+{% if emailaddress.primary %}
+{% else %}<span>
+<form style="display:none;" id="remove_{{ forloop.counter }}" method="post" action="">{% csrf_token %}
+<input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+<input type="hidden" name="action" value="remove"/>
+</form>
+<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" onclick="$('#remove_{{ forloop.counter }}').submit()">{% trans "remove" %}</a>
+</span>
+{% endif %}
+</li>
+{% endfor %}
+</ul>
+
+{% else %} {# no user.emailaddress_set.all #}
+<a data-role="button" href="#" data-theme="e" data-icon="info">
+{% trans "You should really add a password so you can receive notifications, reset your password if you forget it, etc." %}
+</a>
+{% endif %}
+
+<div data-role="collapsible"><h3>{% trans "Add Email Address" %}</h3>
+<form method="post" action="" autocapitalize="off">{% csrf_token %}
+<ul data-role="listview" data-inset="true">
+{{ add_email_form.as_ul }}
+<input type="hidden" name="action" value="add"/>
+<li><button type="submit">{% trans "add" %}</button></li>
+</ul>
+</form>
+</div>   
+{% endblock %}

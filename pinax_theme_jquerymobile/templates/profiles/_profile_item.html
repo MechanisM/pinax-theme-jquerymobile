@@ -1,0 +1,6 @@
+{% load account_tags %}
+<li><a href="{% url profile_detail profile.user.username %}">
+{% if profile.name %}{{ profile.name }} ({% user_display profile.user %}){% else %}{% user_display profile.user %}{% endif %}
+<span class="ui-li-count">{% if profile.location %}{{ profile.location }}{% endif %}</span></a>
+{% if profile.website %}<a href="{{ profile.website }}" title="Visit Site">{{ profile.website }}</a>{% endif %}
+</li>

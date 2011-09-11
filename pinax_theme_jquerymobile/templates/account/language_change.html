@@ -1,0 +1,12 @@
+{% extends "account/base.html" %}{% load i18n %}
+{% block head_title %}{% trans "Language" %}{% endblock %}
+{% block body_title %}{% trans "Language" %}{% endblock %}
+{% block body %}
+<form method="POST" action="">{% csrf_token %}
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider"><h2>{% trans "This site can be used in your preferred language." %}</h2></li>
+{{ form.as_ul }}
+<li><button type="submit">{% trans "Change my language" %}</button></li>
+</ul>
+</form>
+{% endblock %}

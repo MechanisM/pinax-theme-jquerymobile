@@ -1,0 +1,2 @@
+recursive-include pinax_theme_jquerymobile/templates *
+recursive-include pinax_theme_jquerymobile/static *
