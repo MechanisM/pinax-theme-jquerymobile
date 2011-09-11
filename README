@@ -27,6 +27,12 @@ nav & subnav blocks
 Your pages should have blocks "head_title", "body_title"(with same content as "head_title") and "body" and should extend
 "site_base.html".
 
+for each installed app, in app templates in base.html or appname_base.html, you should have:
+
+    {% block body_title_base %}{% trans "Appname" %} : {% endif %}{% block body_title %}{% endblock %}{% endblock %}
+
+somwhere before "body" block
+
 The url name "home" should be defined as the homepage.
 
 by default theme using jquery CDN with latest jquery, jquerymobile.min.js, jquerymobile.min.css
