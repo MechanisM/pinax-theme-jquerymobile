@@ -20,7 +20,7 @@ nav & subnav blocks
 
 "nav" and "subnav" blocks content should be something like:
 
-    <li><a data-role="button" data-icon="back" href="{% url acct_logout %}">Logout</a></li>
+    <li><a data-role="button" data-icon="home" href="{% url home %}">{% trans "Home" %}</a></li>
 
 "nav" block appears in header and "subnav" block in footer
 
