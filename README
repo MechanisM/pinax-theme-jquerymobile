@@ -43,6 +43,7 @@ Forms
 To style forms, do something like:
     
     <form method="POST" action="">{% csrf_token %}
+    <li data-role="list-divider">{% trans "Your Form Name Here" %}</li>
     <ul data-role="listview" data-inset="true">
     {{ form.as_ul }}
     <li><button type="submit">Submit</button></li>
