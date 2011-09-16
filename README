@@ -57,3 +57,9 @@ Todo / Issues
 * build additional templates for other Pinax-related apps
 * add settings option to switch jQuery Mobile themes (A,B,C,D,E) in settings
 * add settings option to load jQuery Mobile static files from CDN or use local files.
+
+Resources
+---------
+
+* jQuery Mobile docs and demos: http://jquerymobile.com/
+* Pinax themes grid at djangopackages: http://djangopackages.com/grids/g/pinax-themes/
